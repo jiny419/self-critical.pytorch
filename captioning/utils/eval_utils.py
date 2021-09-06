@@ -76,6 +76,7 @@ def language_eval(dataset, preds, preds_n, eval_kwargs, split):
 
     # filter results to only those in MSCOCO validation set
     preds_filt = [p for p in preds if p['image_id'] in valids]
+ 
     mean_perplexity = sum([_['perplexity'] for _ in preds_filt]) / len(preds_filt)
     mean_entropy = sum([_['entropy'] for _ in preds_filt]) / len(preds_filt)
     print('using %d/%d predictions' % (len(preds_filt), len(preds)))
@@ -168,7 +169,7 @@ def eval_split(model, crit, loader, eval_kwargs={}):
         with torch.no_grad():
             tmp_eval_kwargs = eval_kwargs.copy()
             tmp_eval_kwargs.update({'sample_n': 1})
-            seq, seq_logprobs = model(fc_feats, att_feats, att_masks, opt=tmp_eval_kwargs, mode='sample')
+            seq, seq_logprobs, _, _ = model(fc_feats, att_feats, att_masks, opt=tmp_eval_kwargs, mode='sample')
             seq = seq.data
             entropy = - (F.softmax(seq_logprobs, dim=2) * seq_logprobs).sum(2).sum(1) / ((seq>0).to(seq_logprobs).sum(1)+1)
             perplexity = - seq_logprobs.gather(2, seq.unsqueeze(2)).squeeze(2).sum(1) / ((seq>0).to(seq_logprobs).sum(1)+1)

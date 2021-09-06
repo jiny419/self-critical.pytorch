@@ -1,0 +1,19 @@
+python tools/eval_ensemble.py \
+--ids 0 1 2
+--models models/Transformer_new_self_critical/infos_trans_nscl-best.pkl models/UpDn_new_self_critical_schedule_long/infos_tdl3_nsc-best.pkl models/att2in_new_self_critical/infos_a2i2_nsc-best.pkl \
+--infos_paths models/Transformer_new_self_critical/model-best.pth models/UpDn_new_self_critical_schedule_long/model-best.pth models/att2in_new_self_critical/model-best.pth
+--weights 0.2 0.7 0.1 \
+--input_json cocookvqatrain.json \ 
+--input_fc_dir data/cocobu_fc \
+--input_att_dir data/cocobu_att \ 
+--input_label_h5 None \
+--num_images -1 \ 
+--language_eval 0 \
+--split train \
+--image_root /home/aimaster/lab_storage/jinyeong/VQA/Concept/Concept_data/OK-VQA/ \
+--use_box 0 \ 
+--max_length 40 \
+--input_box_dir \
+--ids trans updn att2in \
+--verbose_loss 0
+--beam_size 3

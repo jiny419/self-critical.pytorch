@@ -1,0 +1,12 @@
+*.jpg
+*.ipynb
+*.pyc
+*.zip
+data/
+vis/**/*.json
+vis/imgs/
+vis/imgs_trans/
+vis/imgs_updn/
+vis/imgs_att2in/
+models/
+.vscode

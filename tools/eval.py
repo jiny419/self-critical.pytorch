@@ -22,11 +22,11 @@ import torch
 # Input arguments and options
 parser = argparse.ArgumentParser()
 # Input paths
-parser.add_argument('--model', type=str, default='',
+parser.add_argument('--model', type=str, default='./models/Transformer_new_self_critical/model-best.pth',
                 help='path to model to evaluate')
 parser.add_argument('--cnn_model', type=str,  default='resnet101',
                 help='resnet101, resnet152')
-parser.add_argument('--infos_path', type=str, default='',
+parser.add_argument('--infos_path', type=str, default='./models/Transformer_new_self_critical/infos_trans_nscl-best.pkl',
                 help='path to infos to evaluate')
 parser.add_argument('--only_lang_eval', type=int, default=0,
                 help='lang eval on saved results')
