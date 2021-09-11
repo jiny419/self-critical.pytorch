@@ -1,0 +1,15 @@
+TASK1:
+  name: OKVQA
+  use_featrues: true
+  use_features_region: ture
+  loss: CrossEntropyLoss
+  num_labels: 2
+  process: normal
+  img_feature_dir: '/home/aimaster/lab_storage/jinyeong/mmf/data/datasets/okvqa/defaults/features/features_fc6/COCO_trainval2014.lmdb'
+  dataroot: data
+  max_seq_length: 40
+  dataset_type: train_val 
+  columns: ['img_id', 'caption', 'label']
+TASK2:
+  name: VQA
+  

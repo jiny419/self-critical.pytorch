@@ -64,7 +64,6 @@ def decode_sequence(ix_to_word, seq):
     out = []
     for i in range(N):
         txt = ''
-        print(seq[i, :])
         for j in range(D):
             ix = seq[i,j]
             if ix > 0 :
