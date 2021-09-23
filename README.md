@@ -21,6 +21,7 @@ A simple demo colab notebook is available [here](https://colab.research.google.c
 - tensorboard
 - h5py
 - skimage
+- gensim
 
 ## Install
 
