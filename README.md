@@ -19,6 +19,8 @@ A simple demo colab notebook is available [here](https://colab.research.google.c
 - yacs
 - lmdbdict
 - tensorboard
+- h5py
+- skimage
 
 ## Install
 
