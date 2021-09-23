@@ -22,6 +22,7 @@ A simple demo colab notebook is available [here](https://colab.research.google.c
 - h5py
 - skimage
 - gensim
+- java 1.8.0
 
 ## Install
 
