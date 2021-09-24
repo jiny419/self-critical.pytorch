@@ -10,6 +10,7 @@ from typing import List, Optional
 from transformers import RobertaTokenizerFast, AddedToken
 from classification.feature_reader import FeatureReader
 from torch.utils.data import Dataset as DS
+import numpy as np
 
 train_set = "att2in_train.csv"
 valid_set = "att2in_valid.csv"
@@ -39,6 +40,7 @@ class OKVQADataset(Dataset) :
     def __init__(self, image_feature_dir, dataroot, dataset_type, max_seq_length, tokenizer):
         super().__init__(image_feature_dir, dataroot, dataset_type, max_seq_length, tokenizer)
         path = dir_path + "/" + dataroot + '/'
+        self.fc_path = '/home/aimaster/lab_storage/jinyeong/self-critical.pytorch/data/cocobu_fc'
         self.datasets = load_dataset('csv', data_files={train_key: path + train_set, eval_key : path + valid_set})
         self.configs = None
         with open(path + info_file) as json_file:
@@ -79,13 +81,22 @@ class OKVQADataset(Dataset) :
             total_dict[k] = v
 
         img_id = [ind for ind in examples['img_id']]
-        features = []
+
+        att_features = []
         for path in img_id :
             feature, info = self.read_features(path)
-            features.append(feature)
+            att_features.append(feature)
+
+        fc_features = []
+        for path in img_id :
+            fc_file = os.path.join(self.fc_path, path.split('_')[-1].lstrip('0'))
+            fc_feature = np.load(fc_file)
+            fc_features.append(fc_feature)
+
         labels = [[label] for label in examples['label']]
 
-        total_dict['img_features'] = features
+        total_dict['img_att_features'] = att_features
+        total_dict['img_fc_features'] = fc_features
         total_dict['labels'] = labels
         
         return total_dict

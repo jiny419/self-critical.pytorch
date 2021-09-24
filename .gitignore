@@ -2,6 +2,11 @@
 *.ipynb
 *.pyc
 *.zip
+*.pth
+*.pkl
+*.p
+*.0
+
 data/
 vis/**/*.json
 vis/imgs/
