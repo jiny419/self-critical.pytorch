@@ -6,7 +6,7 @@
 
     "dataset_config_name" : "task.yml",
     "validation_split_percentage" : 5,
-    "max_seq_length" : null,
+    "max_seq_length" : 16,
     "line_by_line" : false,
     "pad_to_max_length" : true,
     "max_train_samples" : 20000,
@@ -14,7 +14,7 @@
     
     "do_train" : true,
     "do_eval" : true,
-    "output_dir" : "/home/aimaster/lab_storage/jinyeong/models/",
+    "output_dir" : "/home/aimaster/lab_storage/jinyeong/self-critical.pytorch/models/",
     "evaluation_strategy" : "epoch",
     "per_device_train_batch_size" : 10,
     "per_device_eval_batch_size" : 10,
@@ -23,7 +23,11 @@
     "num_train_epochs" : 20,
     "lr_scheduler_type" : "linear",
     "seed" : 42,
-    "resume_from_checkpoint" : "/home/aimaster/lab_storage/jinyeong/models",
+    "resume_from_checkpoint" : "/home/aimaster/lab_storage/jinyeong/self-critical.pytorch/models",
     "learning_rate" : 2e-5,
-    "overwrite_output" : true
+    "overwrite_output" : true,
+    "word_contrastive" : true, 
+    "img_contrastive" : true, 
+    "sen_contrastive" : true, 
+    "mtl_pretrained" : null
 }
