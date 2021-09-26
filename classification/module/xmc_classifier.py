@@ -84,6 +84,7 @@ class Classifier(nn.Module) :
         img_emb = img_fc
         gt_sen_emb = gt_sen
         token_emb, sen_emb = self.sen_encoder(sen) # output[1] = token embdding, output[1] = sentence embedding 
+        gt_token_emb, gt_sen_emb = self.encoder(gt_sen)
 
         img_proj = self.img_projector(img_emb)
         sen_proj = self.sen_projector(sen_emb)
@@ -127,9 +128,9 @@ class Classifier(nn.Module) :
             img_att = img_att.reshape(img_batch, 10, 10, img_ft)
             img_cond = self.img_transformation(img_att)
            
-            fake_word_loss, fake_word_acc, fake_word_entropy = word_loss(fake_word_feat, img_cond, self.max_len)
+            fake_word_loss, fake_word_acc, fake_word_entropy = word_loss(token_emb, img_cond, self.max_len)
             
-            real_word_loss, real_word_acc, real_word_entropy = word_loss(token_emb, img_cond, self.max_len)
+            real_word_loss, real_word_acc, real_word_entropy = word_loss(gt_token_emb, img_cond, self.max_len)
 
         if self.img_contrastive :
             sen_contrastive_loss, sen_contrastive_acc, sen_contrastive_entropy = contrastive_loss(sen_proj, gt_sen_proj)
@@ -141,6 +142,12 @@ class Classifier(nn.Module) :
             real_img_loss = real_img_loss, 
             real_img_acc = real_img_acc, 
             real_img_entropy = real_img_entropy, 
+            fake_word_loss = fake_word_loss, 
+            fake_word_acc = fake_word_acc, 
+            fake_word_entropy = fake_word_entropy, 
+            real_word_loss = real_word_loss,
+            real_word_acc = real_word_acc, 
+            real_word_entropy = real_word_entropy,
             sen_contrastive_loss = sen_contrastive_loss,
             sen_contrastive_acc = sen_contrastive_acc,
             sen_contrastive_entropy = sen_contrastive_entropy,
